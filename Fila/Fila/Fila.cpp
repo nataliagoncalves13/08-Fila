@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 using namespace std;
 
 // definicao de tipo
@@ -14,7 +15,8 @@ NO* fim = NULL;
 void menu();
 void inicializar();
 void insere();
-void remove();
+void remover();
+void exibir();
 //--------------------------
 
 
@@ -27,7 +29,7 @@ void menu()
 {
 	int op = 0;
 	while (op != 4) {
-		system("cls"); // somente no windows
+		system("clear"); // somente no windows
 		cout << "Menu Fila";
 		cout << endl << endl;
 		cout << "1 - Inicializar Fila \n";
@@ -44,22 +46,24 @@ void menu()
 			break;
 		case 2:insere();
 			break;
-		case 3: remove();
+		case 3: remover();
 			break;
 		case 4:
 			return;
+		case 5: exibir();
+			break;
 		default:
 			break;
 		}
 
-		system("pause"); // somente no windows
+		getchar(); // somente no windows
 	}
 }
 
 void inicializar()
 {
 
-	// se a lista já possuir elementos
+	// se a lista jï¿½ possuir elementos
 	// libera a memoria ocupada
 	NO* aux = inicio;
 	while (aux != NULL) {
@@ -71,6 +75,7 @@ void inicializar()
 	inicio = NULL;
 	fim = NULL;
 	cout << "Fila inicializada \n";
+	getchar();
 
 }
 
@@ -87,11 +92,41 @@ void insere()
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
+	if(inicio==NULL){
+	    inicio=novo;
+	    fim=novo;
+	}
+	else{
+	    fim->prox=novo;
+	    fim=novo;
+	}
+	cout<<"Valor inserido \n";
+	getchar();
 
 
 }
 
-void remove()
+void remover(){
+    if(inicio==NULL){
+        cout<<"Lista vazia \n";
+    }
+    else{
+        NO* marcadoPraMorrer = inicio;
+        inicio=inicio->prox;
+        cout << "Valor deletado: "<<marcadoPraMorrer->valor;
+        free(marcadoPraMorrer);
+    }
+    getchar();
+}
+
+void exibir(){
+    NO* aux =inicio;
+    while(aux!=NULL){
+        cout<<aux->valor<<endl;
+        aux=aux->prox;
+    }
+    getchar();
+}
 {
 
 
